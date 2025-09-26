@@ -1,0 +1,32 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+# Diretórios de compilação e arquivos intermediários
+[Bb]in/
+[Oo]bj/
+
+# Arquivos de usuário do Visual Studio
+.vs/
+*.suo
+*.user
+*.userprefs
+
+# Pacotes e dependências
+[Pp]ackages/
+*.nupkg
+*.cache
+
+# Resultados de testes e logs
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# Configurações de dependências
+.vs/
+.vspscc
+.vssscc
+
+# Arquivos de configurações locais
+# Se você tiver, por exemplo, um arquivo appsettings.development.json com
+# informações sensíveis, pode adicioná-lo aqui.
+# appsettings.development.json

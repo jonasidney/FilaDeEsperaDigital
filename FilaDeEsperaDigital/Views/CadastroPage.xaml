@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FilaEsperaDigital.Views.CadastroPage"
+             BackgroundColor="#F5F5F5">
+
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="16">
+
+            <!-- Barra de Título -->
+            <Frame BackgroundColor="#1CBCF0" Padding="10" CornerRadius="8">
+                <Label Text="Fila de Espera Digital"
+               FontSize="22" FontAttributes="Bold" TextColor="White" HorizontalOptions="Center"/>
+            </Frame>
+
+            <!-- Seletor de Perfil -->
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="12">
+                <RadioButton GroupName="TipoCadastro" Content="Consumidor"
+                     IsChecked="{Binding IsConsumidor}"
+                     CheckedChanged="OnConsumidorChecked"/>
+                <RadioButton GroupName="TipoCadastro" Content="Prestador"
+                     IsChecked="{Binding IsPrestador}"
+                     CheckedChanged="OnPrestadorChecked"/>
+            </StackLayout>
+
+            <!-- Avatar (placeholder apenas) -->
+            <Frame BackgroundColor="#E0E0E0" CornerRadius="50" WidthRequest="90" HeightRequest="90" HorizontalOptions="Center">
+                <Label Text="👤"
+               FontSize="36" HorizontalOptions="Center" VerticalOptions="Center"/>
+            </Frame>
+
+            <!-- Campo sensível: Nome ou Nome do Estabelecimento -->
+            <StackLayout>
+                <Label Text="{Binding CampoNomeLabel}" FontAttributes="Bold"/>
+                <Entry Placeholder="{Binding CampoNomePlaceholder}" Text="{Binding NomeOuEstabelecimento}"/>
+            </StackLayout>
+
+            <!-- Campo sensível: Sobrenome ou Ramo de Atividade -->
+            <StackLayout>
+                <Label Text="{Binding CampoExtraLabel}" FontAttributes="Bold"/>
+                <Entry Placeholder="{Binding CampoExtraPlaceholder}" Text="{Binding SobrenomeOuRamo}"/>
+            </StackLayout>
+
+            <!-- Telefone -->
+            <StackLayout>
+                <Label Text="Telefone" FontAttributes="Bold"/>
+                <Entry Placeholder="(00) 00000-0000" Text="{Binding Telefone}" Keyboard="Telephone"/>
+            </StackLayout>
+
+            <!-- Endereço -->
+            <StackLayout>
+                <Label Text="Endereço" FontAttributes="Bold"/>
+                <Entry Placeholder="Rua, número, bairro" Text="{Binding Endereco}"/>
+            </StackLayout>
+
+            <!-- E-mail -->
+            <StackLayout>
+                <Label Text="E-mail" FontAttributes="Bold"/>
+                <Entry Placeholder="seu@email.com" Text="{Binding Email}" Keyboard="Email"/>
+            </StackLayout>
+
+            <!-- Senha -->
+            <StackLayout>
+                <Label Text="Senha" FontAttributes="Bold"/>
+                <Entry Placeholder="Crie uma senha segura" Text="{Binding Senha}" IsPassword="True"/>
+            </StackLayout>
+
+            <!-- Confirmar Senha -->
+            <StackLayout>
+                <Label Text="Confirmar Senha" FontAttributes="Bold"/>
+                <Entry Placeholder="Confirme sua senha" Text="{Binding ConfirmarSenha}" IsPassword="True"/>
+            </StackLayout>
+
+            <!-- Botões -->
+            <StackLayout Orientation="Horizontal" Spacing="16" HorizontalOptions="Center">
+                <Button Text="Gravar" BackgroundColor="#1CBCF0" TextColor="White" WidthRequest="120" Command="{Binding GravarCommand}"/>
+                <Button Text="Cancelar" BackgroundColor="#E53E3E" TextColor="White" WidthRequest="120" Command="{Binding CancelarCommand}" Clicked="OnCancelarClicked"/>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
