@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="FilaEsperaDigital.Views.PainelPrestadorPage"
+    BackgroundColor="#F5F5F5">
+
+    <ScrollView>
+        <StackLayout Padding="16" Spacing="10">
+
+            <!-- Barra de Título -->
+            <Frame BackgroundColor="#1CBCF0" Padding="10" CornerRadius="12">
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label Grid.Column="0" Text="{Binding NomePrestador}" FontSize="18"
+                           FontAttributes="Bold" TextColor="White" VerticalOptions="Center"/>
+                    <Frame Grid.Column="1" BackgroundColor="White" CornerRadius="20"
+                           WidthRequest="38" HeightRequest="38" Padding="0" VerticalOptions="Center">
+                        <Label Text="{Binding Avatar}" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding EditarPerfilCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Frame>
+                </Grid>
+            </Frame>
+
+            <!-- Card status fila -->
+            <Frame BackgroundColor="White" Padding="10" CornerRadius="10" HasShadow="True">
+                <Grid ColumnDefinitions="*,*,*" VerticalOptions="Center">
+                    <StackLayout Grid.Column="0" HorizontalOptions="Center">
+                        <Label Text="Na fila" FontSize="11" TextColor="#333"/>
+                        <Label Text="{Binding Status.PessoasNaFila, StringFormat='{0:D2}'}" FontSize="18"
+                               FontAttributes="Bold" TextColor="#1CBCF0"/>
+                    </StackLayout>
+                    <StackLayout Grid.Column="1" HorizontalOptions="Center">
+                        <Label Text="Atendidos" FontSize="11" TextColor="#333"/>
+                        <Label Text="{Binding Status.Atendidos, StringFormat='{0:D2}'}" FontSize="18"
+                               FontAttributes="Bold" TextColor="#1CBCF0"/>
+                    </StackLayout>
+                    <StackLayout Grid.Column="2" HorizontalOptions="Center">
+                        <Label Text="Tempo médio" FontSize="11" TextColor="#333"/>
+                        <Label Text="{Binding Status.TempoMedioFormatado}" FontSize="18"
+                               FontAttributes="Bold" TextColor="#1CBCF0"/>
+                    </StackLayout>
+                </Grid>
+            </Frame>
+
+            <!-- Card Em Atendimento -->
+            <Frame BackgroundColor="White" Padding="8" CornerRadius="10" HasShadow="True">
+                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,Auto">
+                    <Label Grid.Row="0" Grid.ColumnSpan="2"
+                           Text="Em atendimento" FontSize="14" FontAttributes="Bold"
+                           TextColor="#1CBCF0" Margin="0,0,0,2"/>
+                    <StackLayout Grid.Row="1" Grid.Column="0" Spacing="1">
+                        <Label Text="{Binding ClienteEmAtendimento.Nome}" FontSize="13" FontAttributes="Bold"/>
+                        <StackLayout Orientation="Horizontal" Spacing="7">
+                            <Label Text="{Binding ClienteEmAtendimento.Servico}" FontSize="12" TextColor="#555"/>
+                            <Label Text="{Binding ClienteEmAtendimento.HorarioFormatado}" FontSize="12" TextColor="#999"/>
+                        </StackLayout>
+                    </StackLayout>
+                    <Button Grid.Row="1" Grid.Column="1"
+                            Text="Concluir"
+                            BackgroundColor="#1CBCF0"
+                            HeightRequest="36" WidthRequest="85"
+                            FontSize="12" CornerRadius="8"
+                            HorizontalOptions="End"
+                            Command="{Binding ConcluirCommand}"/>
+                </Grid>
+            </Frame>
+
+            <!-- Card Próximo -->
+            <Frame BackgroundColor="White" Padding="8" CornerRadius="10" HasShadow="True">
+                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,Auto,Auto">
+                    <Label Grid.Row="0" Grid.ColumnSpan="3"
+                           Text="Próximo" FontSize="14" FontAttributes="Bold"
+                           TextColor="#1CBCF0" Margin="0,0,0,2"/>
+                    <StackLayout Grid.Row="1" Grid.Column="0" Spacing="1">
+                        <Label Text="{Binding ProximoCliente.Nome}" FontSize="13" FontAttributes="Bold"/>
+                        <StackLayout Orientation="Horizontal" Spacing="7">
+                            <Label Text="{Binding ProximoCliente.Servico}" FontSize="12" TextColor="#555"/>
+                            <Label Text="{Binding ProximoCliente.HorarioFormatado}" FontSize="12" TextColor="#999"/>
+                        </StackLayout>
+                    </StackLayout>
+                    <Button Grid.Row="1" Grid.Column="1"
+                            Text="Iniciar"
+                            BackgroundColor="#1CBCF0"
+                            HeightRequest="36" WidthRequest="75"
+                            FontSize="12" CornerRadius="8"
+                            HorizontalOptions="End"
+                            Command="{Binding IniciarCommand}"/>
+                    <Button Grid.Row="1" Grid.Column="2"
+                            Text="Cancelar"
+                            BackgroundColor="#E53E3E"
+                            HeightRequest="36" WidthRequest="75"
+                            FontSize="12" CornerRadius="8"
+                            HorizontalOptions="End"
+                            Command="{Binding CancelarProximoCommand}"/>
+                </Grid>
+            </Frame>
+
+            <!-- Lista de Aguardando -->
+            <Label Text="Aguardando" FontSize="15" FontAttributes="Bold" TextColor="#1CBCF0"/>
+            <CollectionView ItemsSource="{Binding ClientesAguardando}" SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BackgroundColor="White" Padding="4" Margin="0,4" CornerRadius="8" HasShadow="True">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <StackLayout Grid.Column="0" Spacing="1">
+                                    <Label Text="{Binding Nome}" FontSize="13" FontAttributes="Bold"/>
+                                    <Label Text="{Binding Servico}" FontSize="11" TextColor="#777"/>
+                                    <Label Text="{Binding HorarioFormatado}" FontSize="11" TextColor="#999"/>
+                                </StackLayout>
+                                <Button Grid.Column="1"
+                                        Text="Cancelar"
+                                        BackgroundColor="#E53E3E"
+                                        TextColor="White"
+                                        HeightRequest="32"
+                                        WidthRequest="78"
+                                        FontSize="11"
+                                        CornerRadius="8"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.CancelarAguardandoCommand}"
+                                        CommandParameter="{Binding .}"
+                                        HorizontalOptions="End"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Botão Sair sempre na base -->
+            <Button Text="Sair"
+                    BackgroundColor="#E53E3E"
+                    TextColor="White"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    HeightRequest="48"
+                    Margin="0,20,0,0"
+                    VerticalOptions="End"
+                    Command="{Binding SairCommand}" />
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

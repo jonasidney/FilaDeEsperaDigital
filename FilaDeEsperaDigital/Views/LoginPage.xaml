@@ -24,8 +24,10 @@
         <Entry Placeholder="Sua senha" IsPassword="True" />
 
         <!-- Botões -->
-        <Button Text="Entrar" BackgroundColor="#1CBCF0" TextColor="White" />
+        <Button Text="Entrar" BackgroundColor="#1CBCF0" TextColor="White" Clicked="OnEntrarClicked"/>
         <Button Text="Cadastrar" BackgroundColor="#E53E3E" TextColor="White" Clicked="OnCadastrarClicked" />
+        <Button Text="Acessar Painel Prestador" BackgroundColor="#F5B041" TextColor="White" Clicked="OnPainelPrestadorClicked"/>
+
 
     </StackLayout>
 </ContentPage>

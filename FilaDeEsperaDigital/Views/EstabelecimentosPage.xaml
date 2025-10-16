@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FilaEsperaDigital.Views.EstabelecimentosPage"
+             BackgroundColor="#F5F5F5">
+
+    <StackLayout Padding="20" Spacing="16">
+
+        <!-- Barra de Título -->
+        <Frame BackgroundColor="#1CBCF0" Padding="15" CornerRadius="10">
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Nome Consumidor" 
+                       FontSize="18" 
+                       FontAttributes="Bold" 
+                       TextColor="White" 
+                       HorizontalOptions="StartAndExpand"
+                       VerticalOptions="Center"/>
+                <!-- Avatar do usuário -->
+                <Frame BackgroundColor="White" 
+                       CornerRadius="20" 
+                       WidthRequest="40" 
+                       HeightRequest="40" 
+                       Padding="0">
+                    <Label Text="👤" 
+                           FontSize="20" 
+                           HorizontalOptions="Center" 
+                           VerticalOptions="Center"/>
+                </Frame>
+            </StackLayout>
+        </Frame>
+
+        <!-- Barra de Busca -->
+        <Frame BackgroundColor="White" Padding="10" CornerRadius="10" HasShadow="True">
+            <StackLayout Orientation="Horizontal">
+                <Entry Placeholder="Buscar estabelecimentos..." 
+                       Text="{Binding TextoBusca}"
+                       HorizontalOptions="FillAndExpand"
+                       BackgroundColor="Transparent"/>
+                <Label Text="🔍" 
+                       FontSize="20" 
+                       VerticalOptions="Center"/>
+            </StackLayout>
+        </Frame>
+
+        <!-- Título da Lista -->
+        <Label Text="Estabelecimentos Disponíveis" 
+               FontSize="18" 
+               FontAttributes="Bold" 
+               TextColor="#1CBCF0"/>
+
+        <!-- Lista de Estabelecimentos -->
+        <CollectionView ItemsSource="{Binding EstabelecimentosDisponiveis}" BackgroundColor="Transparent">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BackgroundColor="White" Padding="12" Margin="0,5" CornerRadius="10" HasShadow="True">
+                        <Grid ColumnDefinitions="42,*,Auto" RowDefinitions="Auto,Auto">
+
+                            <!-- Avatar emoji do estabelecimento à esquerda -->
+                            <Frame Grid.Row="0" Grid.RowSpan="2" Grid.Column="0"
+                           BackgroundColor="#E0E0E0" CornerRadius="21" WidthRequest="42" HeightRequest="42"
+                           Padding="0" HorizontalOptions="Center" VerticalOptions="Center">
+                                <Label Text="{Binding IconeServico}" FontSize="26" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            </Frame>
+
+                            <!-- Nome do Estabelecimento -->
+                            <Label Grid.Row="0" Grid.Column="1"
+                           Text="{Binding Nome}" FontSize="15" FontAttributes="Bold"
+                           TextColor="#333" VerticalOptions="Center"
+                           LineBreakMode="WordWrap" MaxLines="2"/>
+
+                            <!-- Botão Entrar à direita -->
+                            <Button Grid.Row="0" Grid.Column="2"
+                            Text="Entrar" BackgroundColor="#1CBCF0" TextColor="White"
+                            HeightRequest="34" WidthRequest="71" FontSize="13" CornerRadius="8"
+                            VerticalOptions="Center"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EntrarFilaCommand}"
+                            CommandParameter="{Binding}" />
+
+                            <!-- Indicadores na base -->
+                            <StackLayout Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+                                 Orientation="Horizontal" Spacing="18" VerticalOptions="End" Margin="0,7,0,0">
+                                <StackLayout Orientation="Horizontal" Spacing="5" VerticalOptions="Center">
+                                    <Label Text="👥" FontSize="14"/>
+                                    <Label Text="{Binding PessoasNaFila, StringFormat='{0:D2}'}"
+                                   FontSize="14" TextColor="#1CBCF0" FontAttributes="Bold"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" Spacing="5" VerticalOptions="Center">
+                                    <Label Text="🕐" FontSize="14"/>
+                                    <Label Text="{Binding TempoMedioFormatado}"
+                                   FontSize="14" TextColor="#1CBCF0" FontAttributes="Bold"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Botão Sair -->
+        <Button Text="Sair" 
+                BackgroundColor="#E53E3E" 
+                TextColor="White" 
+                FontSize="16" 
+                FontAttributes="Bold" 
+                CornerRadius="10" 
+                HeightRequest="50"
+                Command="{Binding SairCommand}"/>
+
+    </StackLayout>
+</ContentPage>
